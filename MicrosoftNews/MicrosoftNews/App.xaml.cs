@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using MicrosoftNews.Views;
+using Xamarin.Forms;
 
 namespace MicrosoftNews
 {
@@ -8,7 +9,7 @@ namespace MicrosoftNews
         {
             InitializeComponent();
 
-            MainPage = new MicrosoftNewsPage();
+            MainPage = new LoginView();
         }
 
         protected override void OnStart()
