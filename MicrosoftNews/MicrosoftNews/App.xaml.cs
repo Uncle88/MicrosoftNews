@@ -9,7 +9,8 @@ namespace MicrosoftNews
         {
             InitializeComponent();
 
-            MainPage = new LoginView();
+            var content = new NewsListView();
+            MainPage = new NavigationPage(content);
         }
 
         protected override void OnStart()
