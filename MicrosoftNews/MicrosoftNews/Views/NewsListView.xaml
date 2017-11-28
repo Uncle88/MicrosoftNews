@@ -5,10 +5,10 @@
     Title="NewsList"
     xmlns:local="clr-namespace:MicrosoftNews.Views">
     <ContentPage.Content>
-  <ListView SeparatorVisibility="None" ItemsSource="{Binding Items}">
+  <ListView x:Name="list" SeparatorVisibility="None" ItemsSource="{Binding Items}" >
     <ListView.ItemTemplate>
       <DataTemplate>
-        <EntryCell Label="{Binding Text}" />
+        <EntryCell Label="{Binding Text}"/>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>

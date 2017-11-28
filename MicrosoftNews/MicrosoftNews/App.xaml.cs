@@ -1,6 +1,8 @@
 ﻿using MicrosoftNews.Views;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace MicrosoftNews
 {
     public partial class App : Application
@@ -8,9 +10,7 @@ namespace MicrosoftNews
         public App()
         {
             InitializeComponent();
-
-            var content = new NewsListView();
-            MainPage = new NavigationPage(content);
+            MainPage = new NavigationPage(new NewsListView());
         }
 
         protected override void OnStart()
