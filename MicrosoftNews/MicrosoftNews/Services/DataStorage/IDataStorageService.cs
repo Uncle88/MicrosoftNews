@@ -4,7 +4,7 @@ using MicrosoftNews.Models;
 
 namespace MicrosoftNews.Services.DataStorage
 {
-    public interface IDataStorageService
+     interface IDataStorageService
     {
         List<NewsItems> GetAllNews();
         NewsItems GetItem();
