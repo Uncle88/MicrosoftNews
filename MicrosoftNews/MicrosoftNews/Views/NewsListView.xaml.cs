@@ -18,7 +18,7 @@ namespace MicrosoftNews.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as NewsItems;
+            var item = args.SelectedItem as NewsItem;
             if (item == null)
             {
                 // the item was deselected

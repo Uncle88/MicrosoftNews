@@ -6,7 +6,7 @@ namespace MicrosoftNews.Services.DataStorage
 {
      interface IDataStorageService
     {
-        List<NewsItems> GetAllNews();
-        NewsItems GetItem();
+        List<NewsItem> GetAllNews();
+        NewsItem GetItem();
     }
 }

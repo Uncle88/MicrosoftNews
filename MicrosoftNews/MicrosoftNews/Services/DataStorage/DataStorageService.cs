@@ -16,17 +16,17 @@ namespace MicrosoftNews.Services.DataStorage
         public DataStorageService()
         {
             dsConnection = new SQLiteConnection(_datastoragePathService.DataStoragePath);
-            dsConnection.CreateTable<NewsItems>();
+            dsConnection.CreateTable<NewsItem>();
         }
 
-        public List<NewsItems> GetAllNews()
+        public List<NewsItem> GetAllNews()
         {
-            return dsConnection.Table<NewsItems>().ToList();
+            return dsConnection.Table<NewsItem>().ToList();
         }
 
-        public NewsItems GetItem()
+        public NewsItem GetItem()
         {
-            return dsConnection.Table<NewsItems>().FirstOrDefault();
+            return dsConnection.Table<NewsItem>().FirstOrDefault();
         }
     }
 }

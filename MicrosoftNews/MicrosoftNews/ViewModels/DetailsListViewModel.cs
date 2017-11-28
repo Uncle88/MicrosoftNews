@@ -21,7 +21,7 @@ namespace MicrosoftNews.ViewModels
                 OnPropertyChanged();
             }
         }
-        public DetailsListViewModel(NewsItems item)
+        public DetailsListViewModel(NewsItem item)
         {
             DescriptionNews = item.DescriptionNews;
         }
