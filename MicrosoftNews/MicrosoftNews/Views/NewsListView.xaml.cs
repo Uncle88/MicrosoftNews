@@ -29,7 +29,7 @@ namespace MicrosoftNews.Views
             await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(item)));
 
             // Manually deselect item
-            //characterList.SelectedItem = null;
+            list.SelectedItem = null;
         }
     }
 }
