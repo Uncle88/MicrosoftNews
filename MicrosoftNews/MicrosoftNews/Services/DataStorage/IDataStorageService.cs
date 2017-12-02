@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using MicrosoftNews.Models;
 
 namespace MicrosoftNews.Services.DataStorage
 {
-     interface IDataStorageService
+    public interface IDataStorageService
     {
         List<NewsItem> GetAllNews();
-        NewsItem GetItem();
+        void WriteItemToDB(NewsItem item);
+        void WriteListToDB(ObservableCollection<NewsItem> list);
+        void ClearDB();
     }
 }

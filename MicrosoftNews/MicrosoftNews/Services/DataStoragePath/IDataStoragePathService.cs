@@ -1,7 +1,7 @@
 ﻿using System;
 namespace MicrosoftNews.Services.DataStoragePath
 {
-    interface IDataStoragePathService
+    public interface IDataStoragePathService
     {
        string DataStoragePath { get; }
     }

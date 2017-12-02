@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using MicrosoftNews.Models;
 using MicrosoftNews.Services.DataStoragePath;
+using MicrosoftNews.Services.GettingData;
 using SQLite;
 using Xamarin.Forms;
 
@@ -24,9 +26,19 @@ namespace MicrosoftNews.Services.DataStorage
             return dsConnection.Table<NewsItem>().ToList();
         }
 
-        public NewsItem GetItem()
+        public void WriteItemToDB(NewsItem item)
         {
-            return dsConnection.Table<NewsItem>().FirstOrDefault();
+            dsConnection.Insert(item);
+        }
+
+        public void WriteListToDB(ObservableCollection<NewsItem> list)
+        {
+            dsConnection.InsertAll(list);
+        }
+
+        public void ClearDB()
+        {
+            dsConnection.DeleteAll<NewsItem>();
         }
     }
 }
