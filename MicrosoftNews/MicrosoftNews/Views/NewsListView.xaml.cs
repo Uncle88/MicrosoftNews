@@ -12,7 +12,7 @@ namespace MicrosoftNews.Views
         {
             InitializeComponent();
             BindingContext = new NewsListViewModel()
-            { 
+            {
                 Navigation = this.Navigation
             };
         }

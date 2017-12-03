@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using MicrosoftNews.Models;
 using MicrosoftNews.Services.DataStorage;
 using MicrosoftNews.Services.GettingData;
@@ -17,7 +15,7 @@ namespace MicrosoftNews.ViewModels
 
         private ObservableCollection<NewsItem> _item;
         private NewsItem _itemDescription;
-        private List<NewsItem> tempList;
+        private ObservableCollection<NewsItem> tempList;
 
         public NewsListViewModel()
         {
@@ -27,23 +25,15 @@ namespace MicrosoftNews.ViewModels
             _item = _gdService.GetData();
             _dstorageService.ClearDB();
             _dstorageService.WriteListToDB(_item);
-            Items = _dstorageService.GetAllNews();
-
-            Task.Run(async() => 
-            {
-                await Task.Delay(10000);
-                tempList[0] = new NewsItem { Text = "Pipiska", DescriptionNews ="lsakjdfhasdjkf;aljksdf" };
-                OnPropertyChanged(nameof(Items));
-            });
+            Items = new ObservableCollection<NewsItem>(_dstorageService.GetAllNews());
         }
 
         public INavigation Navigation { get; set; }
 
-        public  List<NewsItem> Items
+        public  ObservableCollection<NewsItem> Items
         {
             get 
             {
-                Debug.WriteLine(tempList[0].Text);
                 return tempList;
             }
             set
@@ -67,11 +57,6 @@ namespace MicrosoftNews.ViewModels
                 OnPropertyChanged();
                 OnItemSelected();
             }
-        }
-
-        void Items_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-
         }
 
         async void OnItemSelected()
