@@ -44,7 +44,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Models\NewsItem.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Views\NewsListView.xaml.cs">
       <DependentUpon>NewsListView.xaml</DependentUpon>
     </Compile>
@@ -56,8 +56,8 @@
     <Compile Include="Services\DataStorage\IDataStorageService.cs" />
     <Compile Include="Services\DataStorage\DataStorageService.cs" />
     <Compile Include="Services\DataStoragePath\IDataStoragePathService.cs" />
-    <Compile Include="Services\GettingData\IGettingDataService.cs" />
-    <Compile Include="Services\GettingData\GettingDataService.cs" />
+    <Compile Include="Services\Rest\IRestService.cs" />
+    <Compile Include="Services\Rest\RestService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -108,6 +108,9 @@
     <Reference Include="SQLite-net">
       <HintPath>..\packages\sqlite-net-pcl.1.4.118\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SQLite-net.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -119,7 +122,7 @@
     <Folder Include="Services\" />
     <Folder Include="Services\DataStorage\" />
     <Folder Include="Services\DataStoragePath\" />
-    <Folder Include="Services\GettingData\" />
+    <Folder Include="Services\Rest\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />

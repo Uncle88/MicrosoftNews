@@ -13,8 +13,8 @@ namespace MicrosoftNews.Views
             this.BindingContext = this._dLViewModel = _dLViewModel;
         }
 
-        public DetailsListView()
-        {
-        }
+        //public DetailsListView()
+        //{
+        //}
     }
 }

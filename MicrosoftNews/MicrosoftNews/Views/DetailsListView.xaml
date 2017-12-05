@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:MicrosoftNews.Views">
 	<ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding DescriptionNews}" TextColor="Black"/>
+            <Label Text="{Binding Description}" TextColor="Black"/>
         </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

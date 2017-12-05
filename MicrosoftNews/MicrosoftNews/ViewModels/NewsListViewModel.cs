@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Threading.Tasks;
 using MicrosoftNews.Models;
 using MicrosoftNews.Services.DataStorage;
 using MicrosoftNews.Services.GettingData;
@@ -10,52 +10,58 @@ namespace MicrosoftNews.ViewModels
 {
     public class NewsListViewModel : ViewModelBase
     {
-        private IGettingDataService _gdService;
+        private IRestService _restService;
         private IDataStorageService _dstorageService;
 
-        private ObservableCollection<NewsItem> _item;
-        private NewsItem _itemDescription;
-        private ObservableCollection<NewsItem> tempList;
+        private Item _currentItem;
+        private ObservableCollection<Item> _titlesList;
 
         public NewsListViewModel()
         {
-            _gdService = new GettingDataService();
+            DataTransformation();
+        }
+
+        public async Task DataTransformation()
+        {
+            _restService = new RestService();
             _dstorageService = new DataStorageService();
 
-            _item = _gdService.GetData();
             _dstorageService.ClearDB();
-            _dstorageService.WriteListToDB(_item);
-            Items = new ObservableCollection<NewsItem>(_dstorageService.GetAllNews());
+
+            Task<ObservableCollection<Item>> item = _restService.GetData();
+            ObservableCollection<Item> tem = await item;
+            _dstorageService.WriteListToDB(tem);
+            Titles = new ObservableCollection<Item>(_dstorageService.GetAllNews());
         }
 
         public INavigation Navigation { get; set; }
 
-        public  ObservableCollection<NewsItem> Items
+        public  ObservableCollection<Item> Titles
         {
             get 
             {
-                return tempList;
+                return _titlesList;
             }
             set
             {
-                if (tempList != value)
-                    tempList = value;
+                if (_titlesList != value)
+                    _titlesList = value;
                 OnPropertyChanged();
             }
         }
 
-        public NewsItem ItemDescription
+        public Item CurrentItem
         {
             get
             {
-                return _itemDescription;
+                return _currentItem;
             }
             set
             {
-                if ( value != _itemDescription)
-                    _itemDescription = value;
-                OnPropertyChanged();
+                if ( value != _currentItem)
+                    _currentItem = value;
                 OnItemSelected();
+                OnPropertyChanged();
             }
         }
 
@@ -64,7 +70,7 @@ namespace MicrosoftNews.ViewModels
             //var item = args.SelectedItem as NewsItem;
             //if (item == null)
                 //return;
-            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(ItemDescription)));
+            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(CurrentItem)));
             //item.SelectedItem = null;
         }
     }

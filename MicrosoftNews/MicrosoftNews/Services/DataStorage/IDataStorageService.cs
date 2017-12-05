@@ -7,9 +7,9 @@ namespace MicrosoftNews.Services.DataStorage
 {
     public interface IDataStorageService
     {
-        List<NewsItem> GetAllNews();
-        void WriteItemToDB(NewsItem item);
-        void WriteListToDB(ObservableCollection<NewsItem> list);
+        List<Item> GetAllNews();
+        void WriteItemToDB(Item item);
+        void WriteListToDB(ObservableCollection<Item> list);
         void ClearDB();
     }
 }

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 using MicrosoftNews.Models;
 
 namespace MicrosoftNews.Services.GettingData
 {
-    public interface IGettingDataService
+    public interface IRestService
     {
-        ObservableCollection<NewsItem> GetData();
+        Task<ObservableCollection<Item>> GetData();
     }
 }
