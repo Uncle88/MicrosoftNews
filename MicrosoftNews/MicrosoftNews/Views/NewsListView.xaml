@@ -8,7 +8,7 @@
   <ListView x:Name="list" SeparatorVisibility="None" ItemsSource="{Binding Items}" SelectedItem="{Binding CurrentItem, Mode=TwoWay}">
     <ListView.ItemTemplate>
       <DataTemplate>
-        <EntryCell Label="{Binding Titles}"/>
+        <EntryCell Label="{Binding Titles}" Height="20"/>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>
