@@ -12,9 +12,5 @@ namespace MicrosoftNews.Views
             InitializeComponent();
             this.BindingContext = this._dLViewModel = _dLViewModel;
         }
-
-        //public DetailsListView()
-        //{
-        //}
     }
 }

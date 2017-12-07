@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using MicrosoftNews.Models;
-using Xamarin.Forms;
+﻿using MicrosoftNews.Models;
 
 namespace MicrosoftNews.ViewModels
 {
