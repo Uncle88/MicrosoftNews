@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using MicrosoftNews.Constants;
 using MicrosoftNews.Models;
 
 namespace MicrosoftNews.Services.GettingData
@@ -14,7 +15,7 @@ namespace MicrosoftNews.Services.GettingData
 
             ObservableCollection<Item> Items;
             var client = new HttpClient();
-            var response = await client.GetStreamAsync("https://news.microsoft.com/feed/"); 
+            var response = await client.GetStreamAsync(MicrosoftConstants.urlRequest); 
             using (XmlReader reader = XmlReader.Create(response)) 
             { 
                 XmlSerializer serializer = new XmlSerializer(typeof(Rss), new XmlRootAttribute("rss")); 

@@ -36,7 +36,7 @@ namespace MicrosoftNews.ViewModels
 
             try
             {
-                Items = new ObservableCollection<Item>(_dstorageService.GetAllNews());
+                Items = new ObservableCollection<Item>(_dstorageService.GetList());
                 if (Items != null)
                 {
                     IsBusy = false;
