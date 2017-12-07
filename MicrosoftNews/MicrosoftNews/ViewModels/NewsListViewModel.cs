@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
+using System.Threading.Tasks;
 using MicrosoftNews.Models;
 using MicrosoftNews.Services.DataStorage;
 using MicrosoftNews.Services.GettingData;
@@ -10,62 +10,88 @@ namespace MicrosoftNews.ViewModels
 {
     public class NewsListViewModel : ViewModelBase
     {
-        private IGettingDataService _gdService;
+        private IRestService _restService;
         private IDataStorageService _dstorageService;
 
-        private ObservableCollection<NewsItem> _item;
-        private NewsItem _itemDescription;
-        private ObservableCollection<NewsItem> tempList;
+        private Item _currentItem;
+        private ObservableCollection<Item> _titlesList;
+        private bool _isBusy;
 
         public NewsListViewModel()
         {
-            _gdService = new GettingDataService();
-            _dstorageService = new DataStorageService();
+            DataTransformation();
+        }
 
-            _item = _gdService.GetData();
+        public async Task DataTransformation()
+        {
+            IsBusy = true;
+            _restService = new RestService();
+            _dstorageService = new DataStorageService();
             _dstorageService.ClearDB();
-            _dstorageService.WriteListToDB(_item);
-            Items = new ObservableCollection<NewsItem>(_dstorageService.GetAllNews());
+
+            Task<ObservableCollection<Item>> item = _restService.GetData();
+            ObservableCollection<Item> tem = await item;
+
+            _dstorageService.WriteListToDB(tem);
+
+            try
+            {
+                Items = new ObservableCollection<Item>(_dstorageService.GetAllNews());
+                if (Items != null)
+                {
+                    IsBusy = false;
+                }
+            }
+            catch
+            {
+                IsBusy = true;
+            }
         }
 
         public INavigation Navigation { get; set; }
 
-        public  ObservableCollection<NewsItem> Items
+        public bool IsBusy
         {
-            get 
-            {
-                return tempList;
-            }
-            set
-            {
-                if (tempList != value)
-                    tempList = value;
+            get { return _isBusy; }
+            set 
+            { 
+                _isBusy= value; 
                 OnPropertyChanged();
             }
         }
 
-        public NewsItem ItemDescription
+        public  ObservableCollection<Item> Items
         {
-            get
+            get 
             {
-                return _itemDescription;
+                return _titlesList;
             }
             set
             {
-                if ( value != _itemDescription)
-                    _itemDescription = value;
+                if (_titlesList != value)
+                    _titlesList = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public Item Title
+        {
+            get
+            {
+                return _currentItem;
+            }
+            set
+            {
+                if ( value != _currentItem)
+                    _currentItem = value;
                 OnItemSelected();
+                OnPropertyChanged();
             }
         }
 
         async void OnItemSelected()
         {
-            //var item = args.SelectedItem as NewsItem;
-            //if (item == null)
-                //return;
-            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(ItemDescription)));
-            //item.SelectedItem = null;
+            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(Title)));
         }
     }
 }

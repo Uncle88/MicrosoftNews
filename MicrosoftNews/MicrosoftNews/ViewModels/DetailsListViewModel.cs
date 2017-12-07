@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using MicrosoftNews.Models;
-using Xamarin.Forms;
+﻿using MicrosoftNews.Models;
 
 namespace MicrosoftNews.ViewModels
 {
     public class DetailsListViewModel : ViewModelBase
     {
         string _descriptionNews;
-        public string DescriptionNews 
+        public string Description 
         {
             get
             {
@@ -21,9 +18,9 @@ namespace MicrosoftNews.ViewModels
                 OnPropertyChanged();
             }
         }
-        public DetailsListViewModel(NewsItem item)
+        public DetailsListViewModel(Item item)
         {
-            DescriptionNews = item.DescriptionNews;
+            Description = item.Description;
         }
     }
 }

@@ -5,12 +5,15 @@
     Title="NewsList"
     xmlns:local="clr-namespace:MicrosoftNews.Views">
     <ContentPage.Content>
-  <ListView x:Name="list" SeparatorVisibility="None" ItemsSource="{Binding Items}" SelectedItem="{Binding ItemDescription, Mode=TwoWay}">
-    <ListView.ItemTemplate>
+        <StackLayout Padding="10">
+        <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Blue" /> 
+  <ListView x:Name="list" SeparatorVisibility="None" ItemsSource="{Binding Items}" SelectedItem="{Binding Title, Mode=TwoWay}" RowHeight="60">
+    <ListView.ItemTemplate>   
       <DataTemplate>
-        <EntryCell Label="{Binding Text}"/>
+        <EntryCell Label="{Binding Title}"/>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>
+        </StackLayout>
 	</ContentPage.Content>
 </ContentPage> 
