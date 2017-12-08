@@ -6,7 +6,9 @@
     xmlns:local="clr-namespace:MicrosoftNews.Views">
 	<ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding Description}" TextColor="Black"/>
+             <ViewCell>
+                <WebView Source ="{Binding WebViewSource, Mode=OneWay}"/>
+            </ViewCell>
         </StackLayout>
 	</ContentPage.Content>
 </ContentPage>

@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="MicrosoftNews.Views.NewsListView"
-    Title="NewsList"
+    Title="Microsoft news"
     xmlns:local="clr-namespace:MicrosoftNews.Views">
     <ContentPage.Content>
         <StackLayout Padding="10">
         <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Blue" /> 
-  <ListView x:Name="list" SeparatorVisibility="None" ItemsSource="{Binding Items}" SelectedItem="{Binding Title, Mode=TwoWay}" RowHeight="60">
+  <ListView SeparatorVisibility="Default" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" RowHeight="60" >
     <ListView.ItemTemplate>   
       <DataTemplate>
-        <EntryCell Label="{Binding Title}"/>
+         <EntryCell Label="{Binding Title}"/>
       </DataTemplate>
     </ListView.ItemTemplate>
   </ListView>

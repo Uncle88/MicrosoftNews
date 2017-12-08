@@ -1,26 +1,54 @@
 ﻿using MicrosoftNews.Models;
+using Xamarin.Forms;
 
 namespace MicrosoftNews.ViewModels
 {
     public class DetailsListViewModel : ViewModelBase
     {
-        string _descriptionNews;
-        public string Description 
+        public DetailsListViewModel(string newsDescription)
+        {
+            _webView = new WebView();
+            var _htmlViewSource = new HtmlWebViewSource();
+            _htmlViewSource.Html = newsDescription;
+            _webView.Source = _htmlViewSource;
+        }
+
+        WebView _webView;
+
+        public WebView WebViewSource
         {
             get
             {
-                return _descriptionNews;
+                return _webView;
             }
             set
             {
-                if (_descriptionNews != value)
-                    _descriptionNews = value;
+                _webView = value;
                 OnPropertyChanged();
             }
         }
-        public DetailsListViewModel(Item item)
-        {
-            Description = item.Description;
-        }
     }
 }
+
+
+
+//string _descriptionNews;
+//public string Description 
+//{
+//    get
+//    {
+//        return _descriptionNews;
+//    }
+//    set
+//    {
+//        if (_descriptionNews != value)
+//        {
+//            _descriptionNews = value;
+//            OnPropertyChanged();
+//        }
+//    }
+//}
+//public DetailsListViewModel(string newsDescription)
+//{
+//_descriptionNews = newsDescription;
+//}

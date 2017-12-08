@@ -13,7 +13,7 @@ namespace MicrosoftNews.ViewModels
         private IRestService _restService;
         private IDataStorageService _dstorageService;
 
-        private Item _currentItem;
+        private Item _selectedItem;
         private ObservableCollection<Item> _titlesList;
         private bool _isBusy;
 
@@ -74,24 +74,33 @@ namespace MicrosoftNews.ViewModels
             }
         }
 
-        public Item Title
+        public Item SelectedItem
         {
             get
             {
-                return _currentItem;
+                return _selectedItem;
             }
             set
             {
-                if ( value != _currentItem)
-                    _currentItem = value;
+                 if (value != _selectedItem)
+                     _selectedItem = value;
                 OnItemSelected();
-                OnPropertyChanged();
+                OnPropertyChanged(); 
+
+
+               // if (value != _selectedItem)
+               //     _selectedItem = value;
+               //var tempItem = _selectedItem;
+                //Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(tempItem.Description)));
+                //OnPropertyChanged();           
+                //_selectedItem = null;
+                //OnItemSelected();
             }
         }
 
         async void OnItemSelected()
         {
-            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(Title)));
+            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(SelectedItem.Description)));
         }
     }
 }
