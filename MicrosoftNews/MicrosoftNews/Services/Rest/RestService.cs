@@ -12,7 +12,6 @@ namespace MicrosoftNews.Services.GettingData
     {
         public async Task<ObservableCollection<Item>> GetData()
         {
-
             ObservableCollection<Item> Items;
             var client = new HttpClient();
             var response = await client.GetStreamAsync(MicrosoftConstants.urlRequest); 

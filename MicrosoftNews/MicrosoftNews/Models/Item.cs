@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
 namespace MicrosoftNews.Models
@@ -13,12 +11,6 @@ namespace MicrosoftNews.Models
         public string Title { get; set; }
         [XmlElement(ElementName = "description")]
         public string Description { get; set; }
-        public bool IsVisible { get; internal set; }
-
-        public static implicit operator Item(ObservableCollection<Item> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 
     [XmlRoot(ElementName = "channel")]

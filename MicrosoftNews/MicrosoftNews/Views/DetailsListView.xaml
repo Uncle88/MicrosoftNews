@@ -5,8 +5,8 @@
     Title="Description of the news"
     xmlns:local="clr-namespace:MicrosoftNews.Views">
 	<ContentPage.Content>
-            <Grid>
-                <WebView Source ="{Binding WebViewSource, Mode=TwoWay }"/>
-            </Grid> 
+            <StackLayout>
+                <WebView Source ="{Binding WebViewSource }" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            </StackLayout> 
 	</ContentPage.Content>
 </ContentPage>

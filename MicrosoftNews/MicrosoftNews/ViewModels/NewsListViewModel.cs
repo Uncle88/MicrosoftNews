@@ -82,25 +82,20 @@ namespace MicrosoftNews.ViewModels
             }
             set
             {
-                 if (value != _selectedItem)
-                     _selectedItem = value;
-                OnItemSelected();
-                OnPropertyChanged(); 
+                _selectedItem = value;
+                OnPropertyChanged();
+                if (value != null)
+                {
+                    OnItemSelected();
+                }
 
-
-               // if (value != _selectedItem)
-               //     _selectedItem = value;
-               //var tempItem = _selectedItem;
-                //Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(tempItem.Description)));
-                //OnPropertyChanged();           
-                //_selectedItem = null;
-                //OnItemSelected();
             }
         }
 
         async void OnItemSelected()
         {
             await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(SelectedItem.Description)));
+            SelectedItem = null;
         }
     }
 }

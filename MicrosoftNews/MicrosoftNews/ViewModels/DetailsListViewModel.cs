@@ -5,13 +5,13 @@ namespace MicrosoftNews.ViewModels
 {
     public class DetailsListViewModel : ViewModelBase
     {
-        HtmlWebViewSource _htmlViewSource;
         public DetailsListViewModel(string newsDescription)
         {
             _htmlViewSource = new HtmlWebViewSource();
             _htmlViewSource.Html = newsDescription;
         }
 
+        HtmlWebViewSource _htmlViewSource;
         public HtmlWebViewSource WebViewSource
         {
             get
@@ -20,32 +20,12 @@ namespace MicrosoftNews.ViewModels
             }
             set
             {
-                _htmlViewSource = value;
-                OnPropertyChanged();
+                if (value != _htmlViewSource)
+                {
+                    _htmlViewSource = value;
+                    OnPropertyChanged();
+                }
             }
         }
     }
 }
-
-
-
-//string _descriptionNews;
-//public string Description 
-//{
-//    get
-//    {
-//        return _descriptionNews;
-//    }
-//    set
-//    {
-//        if (_descriptionNews != value)
-//        {
-//            _descriptionNews = value;
-//            OnPropertyChanged();
-//        }
-//    }
-//}
-//public DetailsListViewModel(string newsDescription)
-//{
-//_descriptionNews = newsDescription;
-//}
