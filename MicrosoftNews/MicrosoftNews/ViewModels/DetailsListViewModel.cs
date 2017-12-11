@@ -5,25 +5,22 @@ namespace MicrosoftNews.ViewModels
 {
     public class DetailsListViewModel : ViewModelBase
     {
+        HtmlWebViewSource _htmlViewSource;
         public DetailsListViewModel(string newsDescription)
         {
-            _webView = new WebView();
-            var _htmlViewSource = new HtmlWebViewSource();
+            _htmlViewSource = new HtmlWebViewSource();
             _htmlViewSource.Html = newsDescription;
-            _webView.Source = _htmlViewSource;
         }
 
-        WebView _webView;
-
-        public WebView WebViewSource
+        public HtmlWebViewSource WebViewSource
         {
             get
             {
-                return _webView;
+                return _htmlViewSource;
             }
             set
             {
-                _webView = value;
+                _htmlViewSource = value;
                 OnPropertyChanged();
             }
         }

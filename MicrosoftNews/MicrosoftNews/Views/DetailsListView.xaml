@@ -2,13 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="MicrosoftNews.Views.DetailsListView"
-    Title="DetailsPage"
+    Title="Description of the news"
     xmlns:local="clr-namespace:MicrosoftNews.Views">
 	<ContentPage.Content>
-        <StackLayout>
-             <ViewCell>
-                <WebView Source ="{Binding WebViewSource, Mode=OneWay}"/>
-            </ViewCell>
-        </StackLayout>
+            <Grid>
+                <WebView Source ="{Binding WebViewSource, Mode=TwoWay }"/>
+            </Grid> 
 	</ContentPage.Content>
 </ContentPage>
