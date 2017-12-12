@@ -55,8 +55,11 @@ namespace MicrosoftNews.ViewModels
             get { return _isBusy; }
             set 
             { 
-                _isBusy= value; 
-                OnPropertyChanged();
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -69,8 +72,10 @@ namespace MicrosoftNews.ViewModels
             set
             {
                 if (_titlesList != value)
+                {
                     _titlesList = value;
-                OnPropertyChanged();
+                    OnPropertyChanged(); 
+                }
             }
         }
 
@@ -82,13 +87,15 @@ namespace MicrosoftNews.ViewModels
             }
             set
             {
-                _selectedItem = value;
-                OnPropertyChanged();
-                if (value != null)
+                if (_selectedItem != value)
                 {
-                    OnItemSelected();
+                    _selectedItem = value;
+                    OnPropertyChanged();
+                    if (value != null)
+                    {
+                        OnItemSelected();
+                    }
                 }
-
             }
         }
 

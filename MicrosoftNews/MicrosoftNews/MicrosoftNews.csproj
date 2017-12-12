@@ -58,7 +58,6 @@
     <Compile Include="Services\DataStoragePath\IDataStoragePathService.cs" />
     <Compile Include="Services\Rest\IRestService.cs" />
     <Compile Include="Services\Rest\RestService.cs" />
-    <Compile Include="Helpers\MicrosoftNewsEventArgs.cs" />
     <Compile Include="Constants\MicrosoftConstants.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -125,7 +124,6 @@
     <Folder Include="Services\DataStorage\" />
     <Folder Include="Services\DataStoragePath\" />
     <Folder Include="Services\Rest\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Constants\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

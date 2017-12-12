@@ -14,18 +14,21 @@ namespace MicrosoftNews.Services.GettingData
         {
             ObservableCollection<Item> Items;
             var client = new HttpClient();
-            var response = await client.GetStreamAsync(MicrosoftConstants.urlRequest); 
+            var response = await client.GetStreamAsync(MicrosoftConstants.URLREQUEST); 
             using (XmlReader reader = XmlReader.Create(response)) 
             { 
-                XmlSerializer serializer = new XmlSerializer(typeof(Rss), new XmlRootAttribute("rss")); 
+                XmlSerializer serializer = new XmlSerializer(typeof(Rss), new XmlRootAttribute(MicrosoftConstants.XMLATTRIBUTE)); 
                 var result = serializer.Deserialize(reader) as Rss;
-                Items = new ObservableCollection<Item>(result.Channel.Item); 
+                try
+                {
+                    Items = new ObservableCollection<Item>(result.Channel.Item);
+                }
+                catch
+                {
+                    Items = new ObservableCollection<Item>();
+                }
+                return Items;
             }
-            if (Items == null)
-            {
-                Items = new ObservableCollection<Item>(); 
-            }
-            return Items;
         }
     }
 }
