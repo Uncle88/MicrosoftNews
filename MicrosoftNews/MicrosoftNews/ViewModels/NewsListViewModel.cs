@@ -13,7 +13,7 @@ namespace MicrosoftNews.ViewModels
         private IRestService _restService;
         private IDataStorageService _dstorageService;
 
-        private Item _currentItem;
+        private Item _selectedItem;
         private ObservableCollection<Item> _titlesList;
         private bool _isBusy;
 
@@ -36,7 +36,7 @@ namespace MicrosoftNews.ViewModels
 
             try
             {
-                Items = new ObservableCollection<Item>(_dstorageService.GetAllNews());
+                Items = new ObservableCollection<Item>(_dstorageService.GetList());
                 if (Items != null)
                 {
                     IsBusy = false;
@@ -55,8 +55,11 @@ namespace MicrosoftNews.ViewModels
             get { return _isBusy; }
             set 
             { 
-                _isBusy= value; 
-                OnPropertyChanged();
+                if (_isBusy != value)
+                {
+                    _isBusy = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -69,29 +72,37 @@ namespace MicrosoftNews.ViewModels
             set
             {
                 if (_titlesList != value)
+                {
                     _titlesList = value;
-                OnPropertyChanged();
+                    OnPropertyChanged(); 
+                }
             }
         }
 
-        public Item Title
+        public Item SelectedItem
         {
             get
             {
-                return _currentItem;
+                return _selectedItem;
             }
             set
             {
-                if ( value != _currentItem)
-                    _currentItem = value;
-                OnItemSelected();
-                OnPropertyChanged();
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged();
+                    if (value != null)
+                    {
+                        OnItemSelected();
+                    }
+                }
             }
         }
 
         async void OnItemSelected()
         {
-            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(Title)));
+            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(SelectedItem.Description)));
+            SelectedItem = null;
         }
     }
 }
