@@ -13,8 +13,8 @@ namespace MicrosoftNews.Services.Rest
         public async Task<ObservableCollection<Item>> GetData()
         {
             ObservableCollection<Item> _newsCollection;
-            var client = new HttpClient();
-            var response = await client.GetStreamAsync(MicrosoftConstants.URLREQUEST); 
+            var _client = new HttpClient();
+            var response = await _client.GetStreamAsync(MicrosoftConstants.URLREQUEST); 
             using (XmlReader reader = XmlReader.Create(response)) 
             { 
                 XmlSerializer serializer = new XmlSerializer(typeof(Rss), new XmlRootAttribute(MicrosoftConstants.XMLATTRIBUTE)); 
