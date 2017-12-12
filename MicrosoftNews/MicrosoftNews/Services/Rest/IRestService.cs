@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MicrosoftNews.Models;
 
-namespace MicrosoftNews.Services.GettingData
+namespace MicrosoftNews.Services.Rest
 {
     public interface IRestService
     {

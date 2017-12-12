@@ -4,13 +4,14 @@ namespace MicrosoftNews.ViewModels
 {
     public class DetailsListViewModel : ViewModelBase
     {
+        private HtmlWebViewSource _htmlViewSource;
+
         public DetailsListViewModel(string newsDescription)
         {
             _htmlViewSource = new HtmlWebViewSource();
             _htmlViewSource.Html = newsDescription;
         }
 
-        HtmlWebViewSource _htmlViewSource;
         public HtmlWebViewSource WebViewSource
         {
             get

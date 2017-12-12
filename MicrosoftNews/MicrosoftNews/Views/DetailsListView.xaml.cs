@@ -5,12 +5,10 @@ namespace MicrosoftNews.Views
 {
     public partial class DetailsListView : ContentPage
     {
-        public DetailsListViewModel _dLViewModel { get; set; }
-
-        public DetailsListView(DetailsListViewModel _dLViewModel)
+        public  DetailsListView(DetailsListViewModel _detailViewModel)
         {
             InitializeComponent();
-            this.BindingContext = this._dLViewModel = _dLViewModel;
+            this.BindingContext = _detailViewModel;
         }
     }
 }

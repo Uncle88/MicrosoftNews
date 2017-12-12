@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MicrosoftNews.Models;
 using MicrosoftNews.Services.DataStorage;
-using MicrosoftNews.Services.GettingData;
+using MicrosoftNews.Services.Rest;
 using MicrosoftNews.Views;
 using Xamarin.Forms;
 
@@ -14,25 +14,25 @@ namespace MicrosoftNews.ViewModels
         private IDataStorageService _dstorageService;
 
         private Item _selectedItem;
-        private ObservableCollection<Item> _titlesList;
+        private ObservableCollection<Item> _newsCollection;
         private bool _isBusy;
 
-        public NewsListViewModel()
+        public NewsListViewModel(INavigation navigate)
         {
+            _restService = new RestService();
+            _dstorageService = new DataStorageService();
+            Navigate = navigate;
+
             DataTransformation();
         }
 
         public async Task DataTransformation()
         {
             IsBusy = true;
-            _restService = new RestService();
-            _dstorageService = new DataStorageService();
             _dstorageService.ClearDB();
 
-            Task<ObservableCollection<Item>> item = _restService.GetData();
-            ObservableCollection<Item> tem = await item;
-
-            _dstorageService.WriteListToDB(tem);
+            var newsItem = await _restService.GetData();
+            _dstorageService.WriteListToDB(newsItem);
 
             try
             {
@@ -48,7 +48,7 @@ namespace MicrosoftNews.ViewModels
             }
         }
 
-        public INavigation Navigation { get; set; }
+        public INavigation Navigate { get; internal set; }
 
         public bool IsBusy
         {
@@ -67,13 +67,13 @@ namespace MicrosoftNews.ViewModels
         {
             get 
             {
-                return _titlesList;
+                return _newsCollection;
             }
             set
             {
-                if (_titlesList != value)
+                if (_newsCollection != value)
                 {
-                    _titlesList = value;
+                    _newsCollection = value;
                     OnPropertyChanged(); 
                 }
             }
@@ -101,7 +101,7 @@ namespace MicrosoftNews.ViewModels
 
         async void OnItemSelected()
         {
-            await Navigation.PushAsync(new DetailsListView(new DetailsListViewModel(SelectedItem.Description)));
+            await Navigate.PushAsync(new DetailsListView(new DetailsListViewModel(SelectedItem.Description)));
             SelectedItem = null;
         }
     }
