@@ -10,18 +10,18 @@ namespace MicrosoftNews.ViewModels
 {
     public class NewsListViewModel : ViewModelBase
     {
-        private IRestService _restService;
-        private IDataStorageService _dstorageService;
+        readonly IRestService _restService;
+        readonly IDataStorageService _dstorageService;
 
         private Item _selectedItem;
         private ObservableCollection<Item> _newsCollection;
         private bool _isBusy;
 
-        public NewsListViewModel(INavigation navigate)
+        public NewsListViewModel(INavigation navigation)
         {
             _restService = new RestService();
             _dstorageService = new DataStorageService();
-            Navigate = navigate;
+            _navigation = navigation;
 
             DataTransformation();
         }
@@ -48,7 +48,7 @@ namespace MicrosoftNews.ViewModels
             }
         }
 
-        public INavigation Navigate { get; internal set; }
+        public INavigation _navigation { get; internal set; }
 
         public bool IsBusy
         {
@@ -101,7 +101,7 @@ namespace MicrosoftNews.ViewModels
 
         async void OnItemSelected()
         {
-            await Navigate.PushAsync(new DetailsListView(new DetailsListViewModel(SelectedItem.Description)));
+            await _navigation.PushAsync(new DetailsListView(SelectedItem.Description));
             SelectedItem = null;
         }
     }
