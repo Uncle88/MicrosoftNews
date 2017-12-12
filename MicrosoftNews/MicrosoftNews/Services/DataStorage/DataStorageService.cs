@@ -11,27 +11,27 @@ namespace MicrosoftNews.Services.DataStorage
     public class DataStorageService : IDataStorageService
     {
         private readonly IDataStoragePathService _datastoragePathService = DependencyService.Get<IDataStoragePathService>();
-        private readonly SQLiteConnection dsConnection;
+        private readonly SQLiteConnection _datastorageConnection;
 
         public DataStorageService()
         {
-            dsConnection = new SQLiteConnection(_datastoragePathService.DataStoragePath);
-            dsConnection.CreateTable<Item>();
+            _datastorageConnection = new SQLiteConnection(_datastoragePathService.DataStoragePath);
+            _datastorageConnection.CreateTable<Item>();
         }
 
         public List<Item> GetList()
         {
-            return dsConnection.Table<Item>().ToList();
+            return _datastorageConnection.Table<Item>().ToList();
         }
 
         public void WriteListToDB(ObservableCollection<Item> list)
         {
-            dsConnection.InsertAll(list);
+            _datastorageConnection.InsertAll(list);
         }
 
         public void ClearDB()
         {
-            dsConnection.DeleteAll<Item>();
+            _datastorageConnection.DeleteAll<Item>();
         }
     }
 }

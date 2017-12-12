@@ -8,9 +8,9 @@ namespace MicrosoftNews.Views
         public NewsListView()
         {
             InitializeComponent();
-            BindingContext = new NewsListViewModel()
+            BindingContext = new NewsListViewModel(Navigation)
             {
-                Navigation = this.Navigation
+                Navigate = Navigation
             };
         }
     }
